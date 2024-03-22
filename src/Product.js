@@ -18,7 +18,7 @@ function Product({ id, title, price, image, rating }) {
     });
   };
   return (
-    <div className="product">
+    <div className="product" key={id}>
       <div className="product_info">
         <p>{title}</p>
         <p className="product_price">
@@ -29,9 +29,14 @@ function Product({ id, title, price, image, rating }) {
           {/* fill()用来初始化 */}
           {Array(rating)
             .fill()
-            .map((_, i) => (
-              <p>⭐</p>
-            ))}
+            .map(
+              (
+                _,
+                i //出于性能考虑，，每个map渲染的元素都需要独特的key值，列表动态变化时，可提升性能和效率
+              ) => (
+                <p key={i}>⭐</p>
+              )
+            )}
         </div>
       </div>
 
